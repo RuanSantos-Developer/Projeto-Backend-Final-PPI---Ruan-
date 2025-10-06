@@ -1,0 +1,35 @@
+{
+  "name": "projeto-backend-final-ppi---ruan-",
+  "version": "1.0.0",
+  "description": "Projeto de Backend de um sistema de livros e clientes",
+  "keywords": [
+    "Node",
+    "Bankedn",
+    "Livros",
+    "Cliente",
+    "Faculdade",
+    "Unoeste",
+    "Projeto"
+  ],
+  "homepage": "https://github.com/RuanSantos-Developer/Projeto-Backend-Final-PPI---Ruan-#readme",
+  "bugs": {
+    "url": "https://github.com/RuanSantos-Developer/Projeto-Backend-Final-PPI---Ruan-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RuanSantos-Developer/Projeto-Backend-Final-PPI---Ruan-.git"
+  },
+  "license": "ISC",
+  "author": "Ruan Oliveira dos Santos",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.1"
+  }
+}
