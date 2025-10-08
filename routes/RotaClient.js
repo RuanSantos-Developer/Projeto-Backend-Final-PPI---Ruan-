@@ -5,14 +5,14 @@ const rotaCliente = Router();
 const clienteController = new ClienteController();
 
 rotaCliente
-.get('/clientes', clienteController.buscarTodos)
+.get('/', clienteController.buscarTodos)
 
-.get('/clientes/:cli_id', clienteController.buscarPorId)
+.get('/:cli_id', clienteController.buscarTodos)
 
-.post('/clientes', clienteController.gravar)
+.post('/', clienteController.gravar)
 
-.delete('/clientes/:cli_id', clienteController.deletar)
+.delete('/:cli_id', clienteController.deletar)
 
-.put('/clientes/:cli_id', clienteController.atualizar);
+.put('/:cli_id', clienteController.atualizar);
 
 export default rotaCliente;

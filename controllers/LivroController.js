@@ -2,7 +2,10 @@ import Livro from '../models/Livro.js';
 
 export default class LivroController {
 
-    gravar(req, res) {
+    gravar = (req, res) => {
+        
+            console.log("Recebido no backend:", req.body);
+
         if (req.method === 'POST' && req.is('application/json')) {
             const dados = req.body;
             if (dados.liv_id && dados.liv_autor && dados.liv_titulo && dados.cli_id) {
@@ -22,7 +25,6 @@ export default class LivroController {
                     res.status(500).json({
                         status: false,
                         "message": 'Erro ao gravar o livro',
-                        "error": err.message
                     });
                 });
             }
@@ -31,12 +33,11 @@ export default class LivroController {
             res.status(400).json({
                 status: false,
                 "message": 'Requisição inválida',
-                "error": err?.message
             });
         }
     };
 
-    buscarTodos(req, res) {
+    buscarTodos = (req, res) => {
         if (req.method === 'GET') {
 
             const id = req.params.liv_id;
@@ -59,7 +60,6 @@ export default class LivroController {
                         res.status(500).json({
                             status: false,
                             "message": 'Erro ao consultar o livro',
-                            "error": err.message
                         });
                     });
 
@@ -78,7 +78,6 @@ export default class LivroController {
                         res.status(500).json({
                             status: false,
                             "message": 'Erro ao consultar os livros',
-                            "error": err.message
                         });
                     });
 
@@ -88,12 +87,11 @@ export default class LivroController {
             res.status(400).json({
                 status: false,
                 "message": 'Requisição inválida',
-                "error": err?.message
             });
         }
     }
 
-    atualizar(req, res) {
+    atualizar = (req, res) => {
 
         if ((req.method === 'PUT' || req.method === 'PATCH') && req.is('application/json')) {
             const dados = req.body;
@@ -115,7 +113,6 @@ export default class LivroController {
                     res.status(400).json({
                         status: false,
                         "message": 'Erro ao atualizar o livro',
-                        "error": err.message
                     });
                 });
 
@@ -125,13 +122,12 @@ export default class LivroController {
             res.status(400).json({
                 status: false,
                 "message": 'Requisição inválida',
-                "error": err?.message
             });
         }
 
     }
 
-    deletar(req, res) {
+    deletar = (req, res) => {
         if (req.method === 'DELETE') {
             const id = req.params.liv_id;
             if (id) {
@@ -152,23 +148,20 @@ export default class LivroController {
                             res.status(404).json({
                                 status: false,
                                 "message": 'Livro não encontrado',
-                                "error": err?.message
                             });
                         }
                     })
                     .catch((err) => {
                         res.status(500).json({
                             status: false,
-                            message: 'Erro ao deletar o livro',
-                            "error": err.message
+                            "message": 'Erro ao deletar o livro',
                         });
                     });
             }
             else {
                 res.status(400).json({
                     status: false,
-                    message: 'Requisição inválida\nAdicione o ID para deletar o livro',
-                    "error": err?.message
+                    "message": 'Requisição inválida\nAdicione o ID para deletar o livro',
                 });
             }
         }

@@ -18,6 +18,7 @@ export default class LivroDAO {
 
             await conexao.execute(sql, values);
         }
+        conexao.release();
 
 
     }
@@ -49,7 +50,6 @@ export default class LivroDAO {
                 return listaLivros;
 
 
-
             }
 
 
@@ -58,7 +58,14 @@ export default class LivroDAO {
 
                 const conexao = await conectar();
 
-                const sql = 'SELECT * FROM livros';
+                const sql =   `SELECT 
+                                    l.liv_id AS id, 
+                                    l.liv_titulo, 
+                                    l.liv_autor, 
+                                    c.cli_id,
+                                    c.cli_nome AS nome_cliente
+                                FROM livros l
+                                LEFT JOIN cliente c ON l.cli_id = c.cli_id`;
 
                 const [rows] = await conexao.query(sql);
 
@@ -66,7 +73,7 @@ export default class LivroDAO {
 
                 for (let row of rows) {
                     const livro = new Livro(
-                        row.liv_id,
+                        row.id,
                         row.liv_titulo,
                         row.liv_autor,
                         row.cli_id

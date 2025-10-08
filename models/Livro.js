@@ -1,7 +1,6 @@
-import LivroDAO from '../DAO/LivroDAO.js';
-import ClienteDAO from '../DAO/ClienteDAO.js';
+import LivroDAO from '../db/LivroDAO.js';
 
-export default class Client {
+export default class Livro {
 
     #liv_id
     #liv_titulo

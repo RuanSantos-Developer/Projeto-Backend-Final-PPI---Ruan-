@@ -1,5 +1,4 @@
-import LivroDAO from '../DAO/LivroDAO.js';
-import ClienteDAO from '../DAO/ClienteDAO.js';
+import ClienteDAO from '../db/ClientDAO.js';
 
 export default class Cliente {
 

@@ -5,14 +5,14 @@ const rotaLivro = Router();
 const livroController = new LivroController();
 
 rotaLivro
-.get('/livros', livroController.buscarTodos)
+.get('/', livroController.buscarTodos)
 
-.get('/livros/:liv_id', livroController.buscarPorId)
+.get('/:liv_id', livroController.buscarTodos)
 
-.post('/livros', livroController.gravar)
+.post('/', livroController.gravar)
 
-.delete('/livros/:liv_id', livroController.deletar)
+.delete('/:liv_id', livroController.deletar)
 
-.put('/livros/:liv_id', livroController.atualizar);
+.put('/:liv_id', livroController.atualizar);
 
 export default rotaLivro;

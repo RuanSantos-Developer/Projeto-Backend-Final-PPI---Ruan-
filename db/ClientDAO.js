@@ -8,9 +8,9 @@ export default class ClienteDAO {
 
             const conexao = await conectar();
 
-            const sql = 'INSERT INTO clientes (cli_nome, cli_email) VALUES (?, ?)';
+            const sql = 'INSERT INTO cliente (cli_cpf, cli_nome, cli_email, cli_telefone) VALUES (?, ?, ?)';
 
-            const values = [cliente.cli_nome, cliente.cli_email];
+            const values = [cliente.cli_cpf,cliente.cli_nome, cliente.cli_email, cliente.cli_telefone];
 
             await conexao.execute(sql, values);
         }
@@ -20,7 +20,7 @@ export default class ClienteDAO {
 
         const conexao = await conectar();
 
-        const sql = 'SELECT * FROM clientes WHERE cli_id = ?';
+        const sql = 'SELECT * FROM cliente WHERE cli_id = ?';
 
         const [rows] = await conexao.query(sql, [cli_id]);
 
@@ -29,8 +29,10 @@ export default class ClienteDAO {
         for (let row of rows) {
             const cliente = new Cliente(
                 row.cli_id,
+                row.cli_cpf,
                 row.cli_nome,
-                row.cli_email
+                row.cli_email,
+                row.cli_telefone
             );
             listaClientes.push(cliente);
         }
@@ -42,7 +44,7 @@ export default class ClienteDAO {
 
         const conexao = await conectar();
 
-        const sql = 'SELECT * FROM clientes';
+        const sql = 'SELECT * FROM cliente';
 
         const [rows] = await conexao.query(sql);
 
@@ -51,8 +53,10 @@ export default class ClienteDAO {
         for (let row of rows) {
             const cliente = new Cliente(
                 row.cli_id,
+                row.cli_cpf,
                 row.cli_nome,
-                row.cli_email
+                row.cli_email,
+                row.cli_telefone
             );
 
             listaClientes.push(cliente);
@@ -66,9 +70,9 @@ export default class ClienteDAO {
 
             const conexao = await conectar();
 
-            const sql = 'UPDATE clientes SET cli_nome = ?, cli_email = ? WHERE cli_id = ?';
+            const sql = 'UPDATE cliente SET cli_nome = ?, cli_email = ?, cli_telefone = ? WHERE cli_id = ?';
 
-            const values = [cliente.cli_nome, cliente.cli_email, cliente.cli_id];
+            const values = [cliente.cli_nome, cliente.cli_email, cliente.cli_telefone, cliente.cli_id];
 
             await conexao.execute(sql, values);
 
@@ -81,7 +85,7 @@ export default class ClienteDAO {
 
             const conexao = await conectar();
 
-            const sql = 'DELETE FROM clientes WHERE cli_id = ?';
+            const sql = 'DELETE FROM cliente WHERE cli_id = ?';
 
             const parametros = [cliente.cli_id];
 

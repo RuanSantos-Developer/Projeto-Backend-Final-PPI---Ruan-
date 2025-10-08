@@ -1,8 +1,9 @@
 import Cliente from '../models/Cliente.js';
+import conectar from '../db/conexao.js';
 
 export default class ClienteController {
 
-            gravar(req, res){
+            gravar = (req, res) => {
                 if(req.method === 'POST' && req.is('application/json')){
                     const dados = req.body;
                     if(dados.cli_cpf && dados.cli_nome && dados.cli_email && dados.cli_telefone){
@@ -22,7 +23,6 @@ export default class ClienteController {
                             res.status(500).json({
                                 status: false,
                                 "message": 'Erro ao gravar o cliente',
-                                "error": err.message
                             });
                         });
                     }
@@ -31,14 +31,13 @@ export default class ClienteController {
                     res.status(400).json({
                         status: false,
                         "message": 'Requisição inválida',
-                        "error": err.message
                     });
                 }
             };
 
 
 
-            buscarTodos(req, res) {
+            buscarTodos = (req, res) => {
             if (req.method === 'GET') {
 
             const id = req.params.cli_id;
@@ -58,11 +57,10 @@ export default class ClienteController {
                     }
                 })
 
-                .catch((err)=>{
+                .catch(()=>{
                     res.status(500).json({
                         status: false,
                         "message": 'Erro ao consultar o cliente',
-                        "error": err.message
                     });
                 });
 
@@ -77,11 +75,10 @@ export default class ClienteController {
                         "clientes": listaClientes
                     });
                 })
-                .catch((err)=>{
+                .catch(()=>{
                     res.status(500).json({
                         status: false,
                         "message": 'Erro ao consultar os clientes',
-                        "error": err.message
                     });
                 });
 
@@ -91,13 +88,12 @@ export default class ClienteController {
             res.status(400).json({
                 status: false,
                 "message": 'Requisição inválida',
-                "error": err.message
             });
         }
         }
 
 
-            atualizar(req, res){
+            atualizar = (req, res) => {
 
             if((req.method === 'PUT' || req.method === 'PATCH' ) && req.is('application/json')){
                 const dados = req.body;
@@ -115,11 +111,10 @@ export default class ClienteController {
                             "message": 'Cliente Atualizado com sucesso'
                         });
 
-                    }).catch((err)=>{
+                    }).catch(()=>{
                         res.status(400).json({
                             status: false,
                             "message": 'Erro ao Atualizar o cliente',
-                            "error": err.message
                         });
                     });
 
@@ -129,19 +124,18 @@ export default class ClienteController {
                 res.status(400).json({
                     status: false,
                     "message": 'Requisição inválida',
-                    "error": err.message
                 });
             }
 
         }
 
 
-            deletar(req, res){
+            deletar = (req, res) => {
                 if(req.method === 'DELETE'){
                 const id = req.params.cli_id;
                 if(id){
                     const cliente = new Cliente();
-                    cliente.consultarPorId(id)
+                    cliente.buscarPorId(id)
                     .then((lista) => {
                         const cliente = lista[0];
                         if (cliente) {
@@ -157,23 +151,20 @@ export default class ClienteController {
                             res.status(404).json({
                                 status: false,
                                 "message": 'Cliente não encontrado',
-                                "error": err.message
                             });
                         }
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         res.status(500).json({
                             status: false,
-                            message: 'Erro ao deletar o cliente',
-                            "error": err.message
+                            "message": 'Erro ao deletar o cliente',
                         });
                     });
                 }
                 else {
                     res.status(400).json({
                         status: false,
-                        message: 'Requisição inválida\nAdicione o ID para deletar o cliente',
-                        "error": err.message
+                        "message": 'Requisição inválida\nAdicione o ID para deletar o cliente',
                     });
                 }
             }
